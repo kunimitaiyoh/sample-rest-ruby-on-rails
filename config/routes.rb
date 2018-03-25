@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :threads
+  resources :articles
 
   root 'welcome#index'
 

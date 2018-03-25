@@ -10,12 +10,13 @@ services:
     volumes:
       - .:/usr/src/forums
   db:
-    image: mysql:8.0
-    # ports:
-    #   - 3306:3306
+    image: mysql:5.7
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - data-volume:/var/lib/mysql
+      MYSQL_DATABASE: forums_development
+    # volumes:
+    #   - data-volume:/var/lib/mysql
 volumes:
   data-volume:

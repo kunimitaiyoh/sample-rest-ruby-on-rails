@@ -5,6 +5,10 @@ services:
       context: .
     ports:
       - 3000:3000
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/forums
   db:
     image: mysql:8.0
     # ports:

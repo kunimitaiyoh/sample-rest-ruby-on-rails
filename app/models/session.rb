@@ -7,7 +7,7 @@ class Session < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  def encrypt(id)
+  def self.encrypt(id)
     Digest::SHA256.hexdigest(id)
   end
 end

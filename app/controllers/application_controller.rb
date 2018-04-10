@@ -1,12 +1,15 @@
 class ApplicationController < ActionController::Base
-  before_action :current_user
-  before_action :require_sign_in!
-  helper_method :signed_in?
+  before_action :current_session
+  before_action :require_login!
+  helper_method :logged?
 
   protect_from_forgery with: :exception
 
   def current_session
-    @session ||= Session.find_by(encrypted_id: Session.encrypt(cookies[:session_id]))
+    session_id = cookies[:session_id]
+    if session_id.present?
+      @session ||= Session.find_by(encrypted_id: Session.encrypt(session_id))
+    end
   end
 
   def login(user)
@@ -31,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def login!
+    def require_login!
       redirect_to login_path unless loggedin?
     end
 end

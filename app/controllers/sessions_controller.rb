@@ -5,13 +5,16 @@ class SessionsController < ApplicationController
   before_action :set_user, only: [:create]
 
   def new
+    if loggedin?
+      redirect_to root_path
+    end
   end
 
   def create
     if @user.authenticate(session_params[:password]) && login(@user)
       redirect_to root_path
     else
-      flash.now[:danger] = t('.flash.invalid_password')
+      flash.now[:alert] = t('.invalid_input')
       render 'new'
     end
   end
@@ -34,7 +37,7 @@ class SessionsController < ApplicationController
     def set_user
       @user = User.find_by!(mail: session_params[:mail])
     rescue
-      flash.now[:danger] = t('.flash.invalid_mail')
+      flash.now[:alert] = t('.invalid_input')
       render action: 'new'
     end
 

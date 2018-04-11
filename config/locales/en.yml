@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  sessions:
+    create:
+      invalid_input: "Mail or Password is invalid."

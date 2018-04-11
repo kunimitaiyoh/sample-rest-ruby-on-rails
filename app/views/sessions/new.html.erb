@@ -1,6 +1,17 @@
 <%= form_for :session, url: login_path do |f| %>
-  <%= f.text_field :mail %>
-  <%= f.password_field :password %>
+
+  <% if flash.key?(:alert) %>
+    <%= flash[:alert] %>
+  <% end %>
+
+  <p>
+    <%= f.label :mail %>
+    <%= f.text_field :mail %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
   
   <%= f.submit %>
 <% end %>

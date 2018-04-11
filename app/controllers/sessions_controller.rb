@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:danger] = t('.flash.invalid_password')
-      render new
+      render 'new'
     end
   end
 
@@ -20,7 +20,16 @@ class SessionsController < ApplicationController
     logout
     redirect_to login_path
   end
-  
+
+  def login(user)
+    reset_session
+    session[:user_id] = user.id
+  end
+
+  def logout
+    reset_session
+  end
+
   private
     def set_user
       @user = User.find_by!(mail: session_params[:mail])

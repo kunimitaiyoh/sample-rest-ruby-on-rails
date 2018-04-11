@@ -18,7 +18,8 @@ class ArticlesController < ApplicationController
   end
   
   def index
-    @user = User.find(@session.data[:user_id])
+    p session
+    @user = User.find(session[:user_id])
     @articles = Article.all
   end
   

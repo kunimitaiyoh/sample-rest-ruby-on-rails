@@ -1,5 +1,5 @@
 class Session < ApplicationRecord
-  self.primary_key = :session_id
+  self.primary_key = :encrypted_id
 
   serialize :data
 
